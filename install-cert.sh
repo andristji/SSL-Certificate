@@ -6,7 +6,7 @@ rm -rf /etc/cert
 mkdir /cert/
 mkdir /etc/cert
 clear
-echo start
+echo " "
 sleep 0.5
 echo -e "============================================="
 echo -e "  Install Certificate Google Trust Services  "
@@ -30,10 +30,14 @@ read -p "Masukan ID Key Google anda: " kid
 read -p "Masukan Hmac Key Google anda: " hmackey
 echo "$domain" >> /etc/cert/domain
 echo "$cfkey" >> /etc/cert/cfkey
-echo "$cfkey" >> /etc/cert/cfemail
-echo "$cfkey" >> /etc/cert/gmail
+echo "$cfemail" >> /etc/cert/cfemail
+echo "$gmail" >> /etc/cert/gmail
 echo "$kid" >> /etc/cert/kid
 echo "$hmackey" >> /etc/cert/hmackey
+clear
+echo " "
+echo Install dimulai..........
+sleep 0.5
 cd /root/
 curl https://get.acme.sh | sh
 source ~/.bashrc
