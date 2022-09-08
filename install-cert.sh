@@ -1,20 +1,25 @@
 clear
+apt install socat -y
+rm -rf .acme.sh/
+rm -rf /cert/
+rm -rf /etc/cert
 mkdir /cert/
 mkdir /etc/cert
-apt install socat -y
 clear
+echo start
+sleep 0.5
 echo -e "============================================="
 echo -e "  Install Certificate Google Trust Services  "
 echo -e "       Support Multi Domain & Wildcard       "
 echo -e "============================================="
-echo -e " Bahan yang diperlukan:                      "
-echo -e " [1]> Domain utama                           "
-echo -e "  (contoh: domain.com, bukan xx.domain.com)  "
-echo -e " [2]> Global API Key Cloudflare              "
-echo -e " [3]> Email yang terdaftar Cloudflare        "
-echo -e " [4]> Email Google                           "
-echo -e " [5]> ID Key Google                          "
-echo -e " [6]> Hmac Key Google                        "
+echo -e " Bahan yang dibutuhkan:                      "
+echo -e " -> Domain utama                             "
+echo -e "  (contoh: domain.com, bukan xxx.domain.com) "
+echo -e " -> Global API Key Cloudflare                "
+echo -e " -> Email yang terdaftar Cloudflare          "
+echo -e " -> Email Google                             "
+echo -e " -> ID Key Google                            "
+echo -e " -> Hmac Key Google                          "
 echo -e "============================================="
 echo -e " "
 read -p "Masukkan main domain anda: " domain
@@ -36,6 +41,7 @@ cd .acme.sh
 export CF_Key="$cfkey"
 export CF_Email="$cfemail"
 bash acme.sh --register-account -m $gmail --server google --eab-kid $kid --eab-hmac-key $hmackey
-bash acme.sh --issue --dns dns_cf -d $domain -d *.$domain --server google --dnssleep --log
+bash acme.sh --issue --dns dns_cf -d $domain -d *.$domain --server google --log
 bash acme.sh --installcert -d $domain --fullchain-file /cert/fullchain.cer --key-file /cert/private.key
+rm -f install-cert.sh
 cd
