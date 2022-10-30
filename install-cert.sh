@@ -45,7 +45,7 @@ cd .acme.sh
 export CF_Key="$cfkey"
 export CF_Email="$cfemail"
 bash acme.sh --register-account -m $gmail --server google --eab-kid $kid --eab-hmac-key $hmackey
-bash acme.sh --issue --dns dns_cf -d $domain -d *.$domain --server google --log
-bash acme.sh --installcert -d $domain --fullchain-file /cert/fullchain.cer --key-file /cert/private.key
+bash acme.sh --issue --dns dns_cf -d $domain -d *.$domain --server google -k ec-256 --debug
+bash acme.sh --installcert -d $domain --fullchain-file /cert/fullchain.cer --key-file /cert/private.key --ecc
 rm -f install-cert.sh
 cd
